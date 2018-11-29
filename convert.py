@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
     print("Generování markdown")
     os.system("xsltproc -o presentation-unsorted.md xslt/presentation.xslt tmp/content.xml")
-    os.system("sed -i -e 's/<\([^!]\)/\&lt;\1/g' presentation-unsorted.md")
+    os.system('sed -i -e "s/<\([^!]\)/\&lt;\\1/g" presentation-unsorted.md')
 
     print("Generování stylu")
     os.system("xsltproc -o css/generated.css xslt/style.xslt tmp/content.xml")
