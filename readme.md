@@ -2,16 +2,11 @@
 
 Nástroj pro převod prezentace ve formátu .odp do reveal.js
 
-
-***
-
 Autor: Filip Skalický
 
 Email: xskali16@stud.fit.vutbr.cz
 
 Licence: GPL3
-
-***
 
 ## Instalace
 
@@ -32,8 +27,7 @@ Je soubor ve formátu json. Minimálně musí obsahovat cestu ke vstupní prezen
     "output": "cesta/presentation.md",
     "separator": "++++",
     "separator-vertical": "----"
-  },
-  ...
+  }
 }
 
 ```
@@ -68,7 +62,6 @@ Konfigurační soubor může obsahovat nastavení převodu jednotlivých slidů 
 
 ```json
 {
-    ...
     "1":{
         "delete": false,
         "content": false,
@@ -91,12 +84,9 @@ delete
 - pro smazání dané stránky je potřeba nastavit hodnotu "true"
 ```json
 {
-    ...
     "1":{
             "delete": true
-    },
-    ...
-      
+    }
 }
 ```
 
@@ -108,14 +98,12 @@ content
 - pro přepsání obsahu je nutné aby hodnota byla řetezec
 ```json
 {
-    ...
     "1":{
             "content": ""
     },
     "2":{
             "content": "Nový obsah"
     }
-    ...  
 }
 ```
 
@@ -127,11 +115,9 @@ absolute
 - pro aktivaci převedení dané stránky je potřeba nastavit hodnotu "true"
 ```json
 {
-    ...
     "1":{
             "absolute": true
     }
-    ...  
 }
 ```
 
