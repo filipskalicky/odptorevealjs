@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import re
-import pprint
-import os
+import sys
+import json
 
 def getKey(item):
     return item[0][3]
@@ -22,15 +22,23 @@ def kontrola(sor, slide):
     return 0
 
 if __name__ == '__main__':
+    with open("tmp/convert.conf") as f:
+        try:
+            conf = json.load(f)
+        except Exception as e:
+            print("Chyba konfiguračního souboru")
+            sys.exit(1)
+            pass
+
     slide = 1
-    output = open("presentation.md", "w")
-    with open('presentation-unsorted.md', 'r') as markdown:
+    output = open("tmp/presentation-spaces.md", "w")
+    with open('tmp/presentation-table.md', 'r') as markdown:
         obsah = ""
         stranka = []
         print("\tslide " + str(slide), end='')
         slide += 1
         for line in markdown:
-            m = re.findall('\+\+\+\+\n', line)
+            m = re.findall(conf["presentation"]["separator-regex"], line)
             if len(m)>0:
                 if len(stranka) != 0:
                     n = re.findall('^\n{2,}$', obsah)
@@ -65,7 +73,20 @@ if __name__ == '__main__':
                     x.append(list(mnew))
                     stranka.append(list(x))
                 else:
-                    obsah += line
+                    m = re.findall('<!-- {_class="(.*?)"} -->', line)
+                    if len(m)>0:
+                        for i in m:
+                            neww = re.sub("\s+", " ", i)
+                            line = re.sub('<!-- {_class="'+i+'"} -->', '<!-- {_class="'+neww+'"} -->', line)
+
+                    m = re.findall('^\s+([^-].*)',line)
+                    if len(m) > 0:
+                        obsah = obsah[:-1]
+                        obsah += m[0]
+                        obsah +="\n"
+                    else:
+                        obsah += line
+
         if len(stranka) != 0:
             n = re.findall('^\n{2,}$', obsah)
             if len(n) > 0:
@@ -82,3 +103,4 @@ if __name__ == '__main__':
     print("")
     output.close()
     markdown.close()
+    f.close()

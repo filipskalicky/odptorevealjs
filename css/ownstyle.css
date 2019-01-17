@@ -39,3 +39,46 @@ h2 + *:not(h2) {
     opacity: 0!important;
 
 }
+
+.reveal table th, .reveal table td {
+    text-align: left;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border: 1px solid;
+}
+
+.reveal table tbody tr:last-child th, .reveal table tbody tr:last-child td {
+    border-bottom: 1px solid;
+}
+
+img {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+.absolute code{
+    font: inherit!important;
+}
+.absolute p, .absolute ul, .absolute li {
+    width: 100%!important;
+}
+.absolute li p {
+    line-height: 150%!important;
+}
+
+.absolute h1 + *:not(h1) {
+	margin-top: 0px !important;
+}
+.absolute h2 + *:not(h2) {
+	margin-top: 0px !important;
+}
+
+.absolute img {
+    max-width: none;
+    max-height: none;
+}
+
+.reveal .slide-number {
+    top: 8px;
+    bottom: auto;
+}

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/white.css">
     <link rel="stylesheet" href="css/ownstyle.css">
@@ -11,15 +12,24 @@
 <body>
 <div class="reveal">
     <div class="slides">
-
-        <section data-markdown="presentation.md" data-separator="^\+\+\+\+$" data-separator-vertical="^\+\+\+\-$" data-charset="utf-8" data-element-attributes="{_\s*?([^}]+?)}"></section>
+        <section data-markdown="presentation.md" data-separator="^\+\+\+\+$" data-separator-vertical="^----$" data-charset="utf-8" data-element-attributes="{_\s*?([^}]+?)}"></section>
     </div>
 </div>
 <script src="js/reveal.js"></script>
 <script src="markdown/marked.js"></script>
 <script src="markdown/markdown.js"></script>
 <script>
-    Reveal.initialize();
+    Reveal.initialize({
+        slideNumber: true,
+        history: true
+    });
+</script>
+<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
 </body>
 </html>

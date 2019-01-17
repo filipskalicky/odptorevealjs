@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     poradi = list()
     zkontrolovat = list()
-    with open('presentation-unsorted.md', 'r') as markdown:
+    with open('tmp/presentation-unsorted.md', 'r') as markdown:
         for line in markdown:
             clas = re.findall("{_class=\"(.*?)\"}", line)
             if len(clas) == 1:
