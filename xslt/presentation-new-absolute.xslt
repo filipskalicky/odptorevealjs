@@ -390,6 +390,7 @@
     <xsl:param name="styl" />
     <xsl:variable name="framestylename" select='@presentation:style-name' />
     <xsl:variable name="drawstylename" select='@draw:text-style-name' />
+    <xsl:variable name="drawstylename2" select='@draw:style-name' />
 <xsl:variable name="nadrazeny" >
     <xsl:choose>
         <xsl:when test="@presentation:class='title'"><xsl:text>h1</xsl:text></xsl:when>
@@ -401,7 +402,7 @@
     <xsl:with-param name="stop">
         <xsl:value-of select="$odsazeni"/>
     </xsl:with-param>
-</xsl:call-template>&lt;<xsl:value-of select="$nadrazeny" /> class="<xsl:value-of select="$framestylename" /><xsl:text> </xsl:text><xsl:value-of select="$drawstylename" />" style="position:absolute;top:calc( <xsl:value-of select="@svg:y" /> );width:calc( <xsl:value-of select="@svg:width" /> );height:calc( <xsl:value-of select="@svg:height" /> );left:calc( <xsl:value-of select="@svg:x" /> );">
+</xsl:call-template>&lt;<xsl:value-of select="$nadrazeny" /> class="<xsl:value-of select="$framestylename" /><xsl:text> </xsl:text><xsl:value-of select="$drawstylename" /><xsl:text> </xsl:text><xsl:value-of select="$drawstylename2" />" style="position:absolute;top:calc( <xsl:value-of select="@svg:y" /> );width:calc( <xsl:value-of select="@svg:width" /> );height:calc( <xsl:value-of select="@svg:height" /> );left:calc( <xsl:value-of select="@svg:x" /> );">
 <xsl:apply-templates select="*">
     <xsl:with-param name="odsazeni"><xsl:value-of select="$odsazeni + 1" /></xsl:with-param>
     <xsl:with-param name="styl"><xsl:value-of select="$styl" /></xsl:with-param>
@@ -422,9 +423,25 @@
     <xsl:with-param name="stop">
         <xsl:value-of select="$odsazeni"/>
     </xsl:with-param>
-</xsl:call-template>&lt;div style="position:absolute;top:0px;width:100%;height:100%;left:0px;background-color:white;">&lt;/div>
+</xsl:call-template>&lt;div style="position:absolute;top:0px;width:100%;height:100%;left:0px;">&lt;/div>
 </xsl:template>
 
+
+
+
+<!--text:a-->
+<xsl:template match="text:a" priority="3">
+    <xsl:param name="odsazeni" />
+    <xsl:param name="styl" />
+    <xsl:param name="nadrazeny" />
+    <xsl:variable name="textstylename" select='@text:style-name' />
+    <xsl:variable name="link" select='@xlink:href' />
+<xsl:call-template name="for">
+    <xsl:with-param name="stop">
+        <xsl:value-of select="$odsazeni"/>
+    </xsl:with-param>
+</xsl:call-template>&lt;a target="_blank" href="<xsl:value-of select="$link" />" class="<xsl:value-of select="$textstylename" />"><xsl:value-of select="." />&lt;/a>
+</xsl:template>
 
 
 

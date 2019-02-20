@@ -10,6 +10,7 @@ if __name__ == '__main__':
     with open("tmp/convert.conf") as f:
         try:
             conf = json.load(f)
+            #print(conf)
         except Exception as e:
             print("Chyba konfiguračního souboru")
             sys.exit(1)
@@ -34,6 +35,9 @@ if __name__ == '__main__':
             else:
                 tmp += line
 
+    if len(tmp) > 0:
+        strankymark.append(tmp)
+
     strankyabsolute = []
     tmp = ""
     with open('tmp/presentation-unsorted-absolute.md', 'r') as markdown:
@@ -44,17 +48,37 @@ if __name__ == '__main__':
                 tmp = ""
             else:
                 tmp += line
+    if len(tmp) > 0:
+        strankyabsolute.append(tmp)
 
     stranky = []
     for i, stranka in enumerate(strankymark):
-        if str(i+1) in conf:
-            if "delete" in conf[str(i+1)] and conf[str(i+1)]["delete"] == True:
+        if str(i) in conf:
+            if "style" in conf[str(i)] and conf[str(i)]["style"] == False:
+                withoutstyle = ""
+                for line in iter(strankyabsolute[i].splitlines()):
+                    line2 = re.sub(r'''<(.*?)style=".*?"''', r"<\1", line)
+                    line3 = re.sub(r'''<(.*?)class=".*?"''', r"<\1", line2)
+                    withoutstyle += re.sub(r'''`(.*?)`''', r"\1", line3)
+                    withoutstyle += "\n"
+                #print(withoutstyle)
+                strankyabsolute[i] = withoutstyle
+
+                withoutstyle = ""
+                for line in iter(strankymark[i].splitlines()):
+                    line2 = re.sub(r'''\`+(.+?)\`+<!-- {_class=".*?"} -->''', r"\1", line)
+                    withoutstyle += re.sub(r'''<!-- {_class=".*?"} -->''', r"", line2)
+                    withoutstyle += "\n"
+                    stranka = withoutstyle
+
+
+            if "delete" in conf[str(i)] and conf[str(i)]["delete"] == True:
                 #print("mažu")
                 continue
-            if "content" in conf[str(i + 1)] and conf[str(i + 1)]["content"] != False and isinstance(conf[str(i + 1)]["content"], str):
-                stranky.append(conf[str(i + 1)]["content"])
+            if "content" in conf[str(i)] and conf[str(i)]["content"] != False and isinstance(conf[str(i)]["content"], str):
+                stranky.append(conf[str(i)]["content"])
                 continue
-            if "absolute" in conf[str(i + 1)] and conf[str(i + 1)]["absolute"] == True:
+            if "absolute" in conf[str(i)] and conf[str(i)]["absolute"] == True:
                 #print("absolute")
                 stranky.append(strankyabsolute[i])
                 continue

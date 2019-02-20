@@ -62,17 +62,18 @@ Konfigurační soubor může obsahovat nastavení převodu jednotlivých slidů 
 
 ```json
 {
-    "1":{
+    "0":{
         "delete": false,
         "content": false,
-        "absolute": false
+        "absolute": false,
+        "style": true
     }
 }
 ```  
 
 číslo slidu
 
-- slidy ve vstupní prezentaci se číslují od 1 
+- slidy ve vstupní prezentaci se číslují od 0 
 - nastavení slidu, který není v prezentaci nebo nemá správný identifikátor (může obsahovat pouze celá čísla) se ignoruje
 
 delete
@@ -117,6 +118,20 @@ absolute
 {
     "1":{
             "absolute": true
+    }
+}
+```
+
+style
+
+- volitelný parametr
+- defaultní hodnota je "true"
+- zda daná stránka obsahuje parametry "class" pro stylování pomocí css
+- pro smazání stylů dané stránky je potřeba nastavit hodnotu "false"
+```json
+{
+    "1":{
+            "style": false
     }
 }
 ```

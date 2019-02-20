@@ -58,6 +58,7 @@ if __name__ == '__main__':
                             zkontrolovat.append(clas[0].split(' '))
                             zkontrolovat.append(clen.split(' '))
 
+
     duplicate = zkontrolovat
     final_list = []
     for num in duplicate:
@@ -98,9 +99,30 @@ if __name__ == '__main__':
                     ukazatel=(poradi.index(prvek))+1
 
 
+    konecne = []
+    with open('tmp/presentation-unsorted-absolute.md', 'r') as markdown:
+        for line in markdown:
+            clas = re.findall("class=\"(.*?)\"", line)
+            #print(clas)
+            if len(clas) > 0:
+                for tridy in clas:
+                    rozdeleny = tridy.split(" ")
+                    for x in rozdeleny:
+                        if len(x) > 0:
+                            if x not in konecne:
+                                konecne.append(x)
 
+    konecne = list(set(konecne)-set(poradi))
 
     output = open("css/generated.css", "w")
+
+    for el in reversed(konecne):
+        if str("." + el.lstrip()) in result:
+            if len(result[str("."+el.lstrip())]) > 0:
+                output.write(str("." + el.lstrip()) + " {\n")
+                for x in result[str("." + el.lstrip())]:
+                    output.write("\t" + x + ": " + result[str("." + el.lstrip())][x] + ";\n")
+                output.write("}\n\n")
 
     for el in reversed(poradi):
         if str("."+el.lstrip()) in result:

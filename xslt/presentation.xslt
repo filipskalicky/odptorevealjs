@@ -59,7 +59,8 @@
 <xsl:template match="draw:frame[@presentation:class='title']">
 rozmery &lt;!-- {_class="hide rozmery" width="<xsl:value-of select="@svg:width" />" height="<xsl:value-of select="@svg:height" />" x="<xsl:value-of select="@svg:x" />" y="<xsl:value-of select="@svg:y" />" } --><xsl:text>
 
-</xsl:text><xsl:variable name="framestylename" select='@presentation:style-name' />
+</xsl:text>
+    <xsl:variable name="framestylename" select='@presentation:style-name' />
     <xsl:variable name="drawstylename" select='@draw:text-style-name' />
     <xsl:for-each select=".//text:p">
         <xsl:variable name="pstylename" select='@text:style-name' /># &lt;!-- {_class="<xsl:value-of select="$framestylename" /><xsl:text> </xsl:text><xsl:value-of select="$drawstylename" /><xsl:text> </xsl:text><xsl:value-of select="$pstylename" />"} --><xsl:for-each select="./text:span">
@@ -94,6 +95,51 @@ rozmery &lt;!-- {_class="hide rozmery" width="<xsl:value-of select="@svg:width" 
     </xsl:for-each><xsl:text>
 </xsl:text>
 </xsl:template>
+
+
+<!--<xsl:template match="draw:frame[@presentation:class='title']">
+rozmery &lt;!&#45;&#45; {_class="hide rozmery" width="<xsl:value-of select="@svg:width" />" height="<xsl:value-of select="@svg:height" />" x="<xsl:value-of select="@svg:x" />" y="<xsl:value-of select="@svg:y" />" } &ndash;&gt;<xsl:text>
+
+</xsl:text><xsl:variable name="framestylename" select='@presentation:style-name' />
+    <xsl:variable name="drawstylename" select='@draw:text-style-name' />
+    <xsl:for-each select=".//text:p">
+        <xsl:variable name="pstylename" select='@text:style-name' /># &lt;!&#45;&#45; {_class="<xsl:value-of select="$framestylename" /><xsl:text> </xsl:text><xsl:value-of select="$drawstylename" /><xsl:text> </xsl:text><xsl:value-of select="$pstylename" />"} &ndash;&gt; <xsl:choose>
+            <xsl:when test="./text()">
+                <xsl:value-of select="text()"/>
+            </xsl:when>
+            <xsl:otherwise><xsl:for-each select="./text:span">
+        <xsl:variable name="spanstylename" select='@text:style-name' />
+        <xsl:choose>
+            <xsl:when test=".//text:line-break"> <xsl:call-template name="for">
+                <xsl:with-param name="stop">
+                    <xsl:value-of select="position()"/>
+                </xsl:with-param>
+            </xsl:call-template><xsl:text> </xsl:text><xsl:call-template name="for">
+                <xsl:with-param name="stop">
+                    <xsl:value-of select="position()"/>
+                </xsl:with-param>
+            </xsl:call-template>&lt;!&#45;&#45; {_class="newline"} &ndash;&gt;</xsl:when>
+            <xsl:otherwise><xsl:call-template name="for">
+                <xsl:with-param name="stop">
+                    <xsl:value-of select="position()"/>
+                </xsl:with-param>
+            </xsl:call-template>
+                <xsl:choose>
+                    <xsl:when test="string-length(text()) = 0"><xsl:text> </xsl:text></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="text()" /><xsl:variable name="nullstring" select="'nullstring'" /></xsl:otherwise>
+                </xsl:choose>
+                <xsl:call-template name="for">
+                    <xsl:with-param name="stop">
+                        <xsl:value-of select="position()"/>
+                    </xsl:with-param>
+                </xsl:call-template>&lt;!&#45;&#45; {_class="<xsl:value-of select="$spanstylename" />"} &ndash;&gt;<xsl:text> </xsl:text></xsl:otherwise>
+        </xsl:choose>
+    </xsl:for-each></xsl:otherwise>
+        </xsl:choose><xsl:text>
+</xsl:text>
+    </xsl:for-each><xsl:text>
+</xsl:text>
+</xsl:template>-->
 
 
 <!--for cyklus-->

@@ -52,6 +52,7 @@
 
 </xsl:text>
 </xsl:template>
+
 <xsl:template match="style:style[@style:family='text']" mode="sty">.<xsl:value-of select="@style:name" />
 <xsl:text> {
 </xsl:text>
@@ -62,11 +63,21 @@
 </xsl:text>
 </xsl:template>
 
+<xsl:template match="style:style[@style:family='graphic']" mode="sty">.<xsl:value-of select="@style:name" />
+<xsl:text> {
+</xsl:text><xsl:apply-templates mode="atribut" /><xsl:text>
+}
+
+</xsl:text>
+</xsl:template>
+
 
 <xsl:template match="*" mode="atribut">
     <xsl:for-each select="@*">
         <xsl:choose>
         <xsl:when test="name()='fo:background-color'">
+    background-color: <xsl:value-of select="." />!important;</xsl:when>
+        <xsl:when test="name()='draw:fill-color'">
     background-color: <xsl:value-of select="." />!important;</xsl:when>
         <xsl:when test="name()='fo:color'">
     color: <xsl:value-of select="." />!important;</xsl:when>

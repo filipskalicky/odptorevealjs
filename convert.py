@@ -133,6 +133,7 @@ if __name__ == '__main__':
         os.remove("prezentace.zip")
     except OSError:
         pass
+    os.system("python3 py/configuration-later.py " + config)
 
     os.system("python3 py/composition.py")
 

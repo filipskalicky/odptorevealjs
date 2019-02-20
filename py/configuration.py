@@ -2,6 +2,7 @@
 
 import sys
 import json
+import re
 
 
 def toRegex(input):
@@ -42,6 +43,8 @@ if __name__ == '__main__':
 
     conf["presentation"]["separator-regex"] = toRegex(separator)
     conf["presentation"]["separator-vertical-regex"] = toRegex(separatorVertical)
+
+
 
 
 
