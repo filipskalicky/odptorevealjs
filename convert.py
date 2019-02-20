@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
 
 
-    shutil.copy2( presentation , 'prezentace.zip')
+    shutil.copy2(str(presentation) , 'prezentace.zip')
     print("Vytváření složky tmp")
     os.mkdir("tmp")
 
