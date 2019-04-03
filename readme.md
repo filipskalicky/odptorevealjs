@@ -235,4 +235,4 @@ Vypsání nápovědy
 
 1. Markdown s obsahem prezentace. Umístění podle konfiguračního souboru.
 2. CSS soubor umístěný v "css/generated.css". Obsahuje nastavení stylů z prezentace
-
+3. Obrázky využité v prezentaci umístěné v "Pictures/"
