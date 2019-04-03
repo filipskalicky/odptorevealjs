@@ -105,13 +105,13 @@ Konfigurační soubor může obsahovat nastavení převodu jednotlivých slidů 
 
  ``` text
 
-První prvek rozmezí od zadu:         -6  -5  -4  -3  -2  -1
-První prvek rozmezí od předu:         0   1   2   3   4   5
+První prvek rozmezí od zadu:        -6  -5  -4  -3  -2  -1
+První prvek rozmezí od předu:        0   1   2   3   4   5
                                     +---+---+---+---+---+---+
                                     | a | b | c | d | e | f |
                                     +---+---+---+---+---+---+
-Poslední prvek rozmezí ze předu:    :   1   2   3   4   5   :
-Poslední prvek rozmezí od zadu:     :  -5  -4  -3  -2  -1   :                               
+Poslední prvek rozmezí ze předu:   :   1   2   3   4   5   :
+Poslední prvek rozmezí od zadu:    :  -5  -4  -3  -2  -1   :                               
 
 ```    
 
