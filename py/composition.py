@@ -67,7 +67,10 @@ if __name__ == '__main__':
                 withoutstyle = ""
                 for line in iter(strankymark[i].splitlines()):
                     line2 = re.sub(r'''\`+(.+?)\`+<!-- {_class=".*?"} -->''', r"\1", line)
-                    withoutstyle += re.sub(r'''<!-- {_class=".*?"} -->''', r"", line2)
+                    line4 = re.sub(r'''<!-- {_class=".*?"} -->''', r"", line2)
+                    line5 = re.sub(r'''<span class="newline"> </span>''', r"", line4)
+                    line6 = re.sub(r'''<span class=".*?nullstring.*?"> </span>''', r"", line5)
+                    withoutstyle += re.sub(r'''<span class=".*?">(.*?)</span>''', r"\1", line6)
                     withoutstyle += "\n"
                     stranka = withoutstyle
 
@@ -90,10 +93,10 @@ if __name__ == '__main__':
 
     for i, x in enumerate(stranky):
         output.write(x)
-        output.write("\n\n")
+        output.write("\n")
         if i < len(stranky)-1:
             output.write(conf["presentation"]["separator"])
-            output.write("\n")
+            output.write("\n\n")
 
     my_file = Path("index.html")
     tmp = ""

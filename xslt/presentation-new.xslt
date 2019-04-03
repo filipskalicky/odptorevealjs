@@ -156,7 +156,23 @@
     <xsl:when test="$nadrazeny = 'h2'">##</xsl:when>
     <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
 </xsl:choose>
-<xsl:choose><xsl:when test="0 = count(*)"><xsl:text> </xsl:text><xsl:value-of select="." /> &lt;!-- {_class="<xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" />"} --><xsl:text>
+<xsl:choose><xsl:when test="(count(*) &gt; 0) and (count(./text()) &gt; 0)">
+    <xsl:variable name="elementchyba"  select="name(.)" />
+<xsl:for-each select="./text()">
+    <xsl:choose>
+        <xsl:when test="string-length() &gt; 1"><xsl:text>&lt;!-- {_class="hide pozor" data-id="</xsl:text><xsl:value-of select="$elementchyba" /><xsl:text>" } --></xsl:text></xsl:when>
+    </xsl:choose>
+</xsl:for-each>
+<xsl:choose>
+    <xsl:when test="$nadrazeny = 'h1' or $nadrazeny = 'h2' or $nadrazeny = 'li'"> &lt;!-- {_class="<xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" />"} --></xsl:when>
+    <xsl:otherwise><xsl:text></xsl:text></xsl:otherwise>
+</xsl:choose><xsl:text></xsl:text>
+<xsl:apply-templates select="*">
+    <xsl:with-param name="odsazeni"><xsl:value-of select="$odsazeni" /></xsl:with-param>
+    <xsl:with-param name="styl"><xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" /></xsl:with-param>
+    <xsl:with-param name="nadrazeny"><xsl:value-of select="$nadrazeny" /></xsl:with-param>
+</xsl:apply-templates>
+</xsl:when><xsl:when test="0 = count(*)"><xsl:text> </xsl:text><xsl:value-of select="." /> &lt;!-- {_class="<xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" />"} --><xsl:text>
 </xsl:text>
 </xsl:when>
 <xsl:otherwise><xsl:choose>
@@ -179,7 +195,21 @@
     <xsl:param name="nadrazeny" />
     <xsl:param name="apostrof"><xsl:value-of select="position()" /></xsl:param>
     <xsl:variable name="textstylename" select='@text:style-name' /><xsl:text></xsl:text>
-<xsl:choose><xsl:when test="0 = count(*)"><xsl:call-template name="for">
+<xsl:choose><xsl:when test="(count(*) &gt; 0) and (count(./text()) &gt; 0)">
+    <xsl:variable name="elementchyba"  select="name(.)" />
+<xsl:for-each select="./text()">
+    <xsl:choose>
+        <xsl:when test="string-length() &gt; 1"><xsl:text>&lt;!-- {_class="hide pozor" data-id="</xsl:text><xsl:value-of select="$elementchyba" /><xsl:text>" } --></xsl:text></xsl:when>
+    </xsl:choose>
+</xsl:for-each>
+<xsl:text></xsl:text>
+<xsl:apply-templates select="*">
+    <xsl:with-param name="odsazeni"><xsl:value-of select="$odsazeni" /></xsl:with-param>
+    <xsl:with-param name="styl"><xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" /></xsl:with-param>
+    <xsl:with-param name="nadrazeny"><xsl:value-of select="$nadrazeny" /></xsl:with-param>
+    <xsl:with-param name="apostrof"><xsl:value-of select="$apostrof" /></xsl:with-param>
+</xsl:apply-templates>
+</xsl:when><xsl:when test="0 = count(*)"><xsl:call-template name="for">
     <xsl:with-param name="znak">
         <xsl:text>`</xsl:text>
     </xsl:with-param>
@@ -271,7 +301,19 @@
         <xsl:value-of select="$odsazeni"/>
     </xsl:with-param>
 </xsl:call-template>-<xsl:choose>
-    <xsl:when test="0 = count(*)"><xsl:text> </xsl:text><xsl:value-of select="." /> &lt;!-- {_class="<xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" />"} --><xsl:text>
+    <xsl:when test="(count(*) &gt; 0) and (count(./text()) &gt; 0)">
+    <xsl:variable name="elementchyba"  select="name(.)" />
+<xsl:for-each select="./text()">
+    <xsl:choose>
+        <xsl:when test="string-length() &gt; 1"><xsl:text>&lt;!-- {_class="hide pozor" data-id="</xsl:text><xsl:value-of select="$elementchyba" /><xsl:text>" } --></xsl:text></xsl:when>
+    </xsl:choose>
+</xsl:for-each>
+<xsl:apply-templates select="*">
+    <xsl:with-param name="odsazeni"><xsl:value-of select="$odsazeni + 1" /></xsl:with-param>
+    <xsl:with-param name="styl"><xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" /></xsl:with-param>
+    <xsl:with-param name="nadrazeny"><xsl:text>li</xsl:text></xsl:with-param>
+</xsl:apply-templates>
+</xsl:when><xsl:when test="0 = count(*)"><xsl:text> </xsl:text><xsl:value-of select="." /> &lt;!-- {_class="<xsl:value-of select="$styl" /><xsl:text> </xsl:text><xsl:value-of select="$textstylename" />"} --><xsl:text>
 </xsl:text>
 </xsl:when>
 <xsl:otherwise>

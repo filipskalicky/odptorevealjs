@@ -110,6 +110,8 @@ if __name__ == '__main__':
     os.system("xsltproc --stringparam oddelovac '\n" + separator + "\n' -o tmp/presentation-unsorted.md xslt/presentation-new.xslt tmp/content.xml")
     os.system("xsltproc --stringparam oddelovac '\n" + separator + "\n' -o tmp/presentation-unsorted-absolute.md xslt/presentation-new-absolute.xslt tmp/content.xml")
 
+    os.system("python3 py/load-error.py")
+
     os.system("python3 py/table.py")
 
     print("Generování stylu")
@@ -128,6 +130,9 @@ if __name__ == '__main__':
     os.system("python3 py/position.py")
     os.system("python3 py/spaces.py")
 
+    os.system("python3 py/span.py")
+    os.system("python3 py/characters.py")
+    os.system("python3 py/rows.py")
 
     try:
         os.remove("prezentace.zip")
@@ -136,6 +141,9 @@ if __name__ == '__main__':
     os.system("python3 py/configuration-later.py " + config)
 
     os.system("python3 py/composition.py")
+
+    print("Přehled převodu")
+    os.system("python3 py/errors.py")
 
 
     print("Mazání dočasných souborů")

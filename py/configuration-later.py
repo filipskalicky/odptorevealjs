@@ -86,21 +86,41 @@ if __name__ == '__main__':
                 #print("špatné indexy -> ignoruju nastavení")
         #else:
             #print("není rozsah -> ignoruju")
-        m = re.findall("^(\d+)(\,\s{0,1}\d+)*\,\s{0,1}(\d+)$", x)
+        m = re.findall("^(-{0,1}\d+)(\,\s{0,1}-{0,1}\d+)*\,\s{0,1}(-{0,1}\d+)$", x)
         if len(m) >0:
             for y in m[0]:
-                n = re.findall("\d+", y)
+                n = re.findall("-{0,1}\d+", y)
                 if len(n) > 0:
                     n = int(n[0])
-                    if str(n) in tmpconf:
-                        j = conf[x]
-                        pp = dict(tmpconf[str(n)])
-                        pp.update(j)
-                        tmpconf[str(n)] = pp
+                    if n < 0:
+                        n = len(strankymark) + n
+                        if n == len(strankymark):
+                            n = 0
+                    if n >= 0 and n < len(strankymark):
+                        if str(n) in tmpconf:
+                            j = conf[x]
+                            pp = dict(tmpconf[str(n)])
+                            pp.update(j)
+                            tmpconf[str(n)] = pp
 
-                    else:
-                        tmpconf[str(n)] = conf[x]
+                        else:
+                            tmpconf[str(n)] = conf[x]
             continue
+        m = re.findall("^(-\d+)$", x)
+        if len(m) > 0:
+            n = len(strankymark) + int(m[0])
+            if n == len(strankymark):
+                n = 0
+            if n >=0 and n < len(strankymark):
+                if str(n) in tmpconf:
+                    j = conf[x]
+                    pp = dict(tmpconf[str(n)])
+                    pp.update(j)
+                    tmpconf[str(n)] = pp
+                else:
+                    tmpconf[str(n)] = conf[x]
+            continue
+
         if x in tmpconf:
             j = conf[x]
             pp = dict(tmpconf[x])
